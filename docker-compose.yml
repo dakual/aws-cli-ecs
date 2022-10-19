@@ -1,0 +1,27 @@
+version: '3'
+services:
+  frontend-app:
+    container_name: frontend-app
+    image: public.ecr.aws/m2a7z1o1/frontend-app:latest 
+    ports:
+      - 8080:8080
+    volumes:
+    - app:/app
+    environment:
+      - AWS_REGION=us-east-1
+      - MESSAGE=Hello AWS
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: app
+        awslogs-region: eu-central-1
+        awslogs-create-group: "true"
+        awslogs-stream-prefix: app
+    x-aws-role:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Action: logs:*
+          Resource: "*"
+volumes:
+  app:

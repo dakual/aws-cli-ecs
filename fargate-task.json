@@ -1,0 +1,37 @@
+{
+  "family": "frontend-app", 
+  "networkMode": "awsvpc",
+  "executionRoleArn": "arn:aws:iam::632296647497:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+      {
+          "name": "frontend-app", 
+          "image": "public.ecr.aws/m2a7z1o1/frontend-app:latest", 
+          "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "frontend-app",
+                "awslogs-region": "eu-central-1",
+                "awslogs-create-group": "true",
+                "awslogs-stream-prefix": "ecs"
+            }
+        },
+          "portMappings": [
+              {
+                  "containerPort": 8080, 
+                  "hostPort": 8080, 
+                  "protocol": "tcp"
+              }
+          ], 
+          "essential": true, 
+          "entryPoint": ["sh", "-c"], 
+          "command": [
+            "/bin/sh -c \"npm start\""
+          ]
+      }
+  ], 
+  "requiresCompatibilities": [
+      "FARGATE"
+  ], 
+  "cpu": "256", 
+  "memory": "512"
+}

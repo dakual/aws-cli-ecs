@@ -1,0 +1,16 @@
+{
+  "cluster": "demo-cluster",
+  "serviceName": "frontend-service",
+  "taskDefinition": "frontend-app",
+  "launchType": "FARGATE",
+  "schedulingStrategy": "REPLICA",
+  "platformVersion": "LATEST",
+  "networkConfiguration": {
+     "awsvpcConfiguration": {
+        "assignPublicIp": "ENABLED",
+        "securityGroups": [ "sg-095938d5e717361ea" ],
+        "subnets": [ "subnet-02caf3f4a7dab08f6" ]
+     }
+  },
+  "desiredCount": 1
+}
